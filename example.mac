@@ -1,0 +1,30 @@
+! Example macro	                        The character  !  indicates a comment. This line is not executed.
+
+$x = 15	                                 !Defines a user-defined variable and assigns a value. User-defined variables always begin with the $-character.
+
+@xxx = sqrt($x)+[efl]	                  !Defines a user-defined function. User-defined functions always begin with the @-character.
+
+res c:\temp\demo.otx	                     !Restores an optical system
+
+lis ; vie ; fan	                        !Multiple commands/expressions can be entered in a single line, separated by semicolons.
+
+sca sa 2*pi	                              !Use previously defined constants in expressions. This command scales all surfaces (sa) by 2p.
+
+wl w%1 %2	                              !Use parameters (%1, %2), which have been passed to the macro from the command line. From the parameters given above, the command translates to:  wl w3 0.546
+
+print 'Radius of surface 2 is:' [rdy s2]	!Retrieve lens parameter or performance parameter and use it in other expressions. Here  rdy s2  is the radius on surface 2.
+
+thi s3 sqrt(2)*[thi s2]	                  !Use lens database items in more complex expressions and assign it to other lens parameter.
+
+print 'Square root of 2: ' 2*sqrt( &      !Span expressions over several lines. Continuation is defined by the & character. 
+2)	
+
+do $x = 1,9,2                             !DO-loop construct. Nesting depth is 20.
+   print $x sqrt($x)
+enddo	
+
+if ($a > 3) then                          !IF construct. Nesting depth is 20.
+   print '$ a is greater than 3'
+else
+   print '$ a is less than or equal to 3'
+endif

@@ -1,0 +1,387 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "optalix",
+	"scopeName": "source.optalix",
+	"patterns": [
+		 {
+			 "include": "#comments"
+		 },
+		 {
+			 "include": "#numbers"
+		 },
+		 {
+			 "include": "#strings"
+		 },
+		 {
+			 "include": "#variables"
+		 },
+		 {
+			 "include": "#preprocessors"
+		 },
+		 {
+			 "include": "#controls"
+		 },
+		 {
+			 "include": "#qualifiers"
+		 },
+		 {
+			 "include": "#keywords"
+		 },
+		 {
+			 "include": "#functions"
+		 }
+	],
+	"repository": {
+		"comments":{
+			"patterns":[
+				{
+					"match": "!.*$",
+					"name": "comment.line.optalix"
+				}
+			]
+		},
+		"numbers":{
+			"patterns":[
+				{
+					"match": "(?<=[\\s\\-\\+\\*\\/\\\\=:\\(,]|^)\\d*\\.?\\d+([eE][+-]?\\d)?([0-9&&[^\\.]])*\\b",
+					"name": "constant.numeric.optalix"
+				}
+			]
+		},
+		"strings":{
+			"patterns":[
+				{
+					"begin": "'",
+					"end": "'",
+					"name": "string.quoted.single.optalix"
+				 },
+				 {
+					 "begin": "\"",
+					 "end": "\"",
+					 "name": "string.quoted.double.optalix"
+				 }
+			]
+		},
+		"variables":{
+			"patterns":[
+				{
+					"comment": "user defined variable",
+					"match": "(\\$)([a-zA-Z][a-zA-Z0-9_]*)\\b",
+					"name": "variable.other.optalix"
+				 },
+				 {
+					"match": "[\\%]\\d+\\b",
+					"name": "variable.parameter.optalix"
+				 }
+			]
+		},
+		"preprocessors":{
+			"patterns": [
+				{
+					"comment": "file inclusions",
+					"match": "^\\s*(\\#include)\\b(.*$)",
+					"captures": {
+						"1":{
+							"name": "keyword.preprocessor.optalix"
+						},
+						"2":{
+							"name": "string.filename.optalix"
+						}
+					}
+				},
+				{
+					"comment": "define",
+					"match": "^\\s*(\\#define)\\b",
+					"captures": {
+						"1":{
+							"name": "keyword.preprocessor.optalix"
+						}
+					}
+				}
+			]
+		},
+		"controls":{
+			"patterns":[
+				{
+					"comment": "RUN statement",
+					"match": "\\b((?i)RUN)\\s+([a-zA-Z0-9]\\.mac)\\b",
+					"captures": {
+						"1":{
+							"name": "keyword.control.optalix"
+						},
+						"2":{
+							"name": "string.other.optalix"
+						}
+					}
+				},
+				{
+					"match": "(^|;|\\(|\\s)((?i)IF|THEN|ELSE|ELSEIF|ENDIF|WHILE|ENDWHILE|DO|ENDDO|RETURN)\\b",
+					"captures":{
+					   "2":{
+						  "name": "keyword.control.optalix"
+					   }
+					}
+				 },
+				 {
+					 "match": "(^|;|\\(|\\s)((?i)PRINT|EVA|INPUT|OPEN|CLOSE|SELECT)\\b",
+					 "captures":{
+						"2":{
+						   "name": "keyword.control.optalix"
+						}
+					 }
+				 },
+				 {
+					"match": "(^|;|\\(|\\s)((?i)AND|OR)\\b",
+					"name": "keyword.operator.optalix"
+				 },
+				 {
+					"match": "(^|;|\\(|\\s)((?i)YES|NO)\\b",
+					"name": "constant.operator.optalix"
+				 }
+			]
+		},
+		"qualifiers":{
+      		"patterns":[
+				{
+					"comment": "qualifier with constant number or special character",
+					"match": "\\s(?i:[abefgijlqrstuwz](\\d+|[acilos]))\\b",
+					"captures":{
+						"0":{
+							"name": "constant.language.qualifier.optalix"
+						}
+					}
+				},
+				{
+					"comment": "qualifier with string label",
+					"match": "\\s((?i)[abefgijlqrstuwz])((\".*\")|('.*'))",
+					"captures":{
+						"1":{
+							"name": "constant.language.qualifier.optalix"
+						},
+						"3":{
+							"name": "string.quoted.double.optalix"
+						},
+						"4":{
+							"name": "string.quoted.single.optalix"
+						}
+					}
+				},
+				{
+					"comment": "qualifier with user-defined variable",
+					"match": "\\s((?i)[abefgijlqrstuwz])(\\$[a-zA-Z][a-zA-Z0-9_]*)\\b",
+					"captures":{
+						"1":{
+							"name": "constant.language.qualifier.optalix"
+						},
+						"2":{
+							"name": "variable.other.optalix"
+						}
+					}
+				},
+				{
+					"comment": "range qualifier",
+					"match": "(\\.{2})(\\d+|(?i)[acilos])\\b",
+					"captures":{
+						"1":{
+							"name": "punctuation.definition.range.qualifier.optalix"
+						},
+						"2":{
+							"name": "constant.language.qualifier.optalix"
+						}
+					}
+				}
+			]
+		},
+		"keywords":{
+			"patterns":[
+				{
+					"comment": "configuration data",
+					"match": "\\b((?i)SCA|LIS|LEN|DIM|RDM|RES|SAV|WRL|REF|WL|XAN|YAN|XOB|YOB|XIM|YIM|FNO|NA|NAO|EPD|APD|PUI|PUX|PUY)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "paraxial data",
+					"match": "\\b((?i)EFL|EFLX|PWR|BFL|OAL|SYL|SH1|SH2|OID|MAG|RED|EPD|SAP|SAPI|SEP|PRD|PRDI|UMY|UA|HMY|HA|UCY|UB|HCY|HB)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "surface properties and positions",
+					"match": "\\b((?i)THI|THR|IMD|IMC|IND|ABBE|CUX|CUY|RDX|RDY|ADE|BDE|CDE|XDE|YDE|ZDE|AADE|ABDE|ACDE|XSG|YSG|ZSG|XSC|YSC|ZSC|CXG|CYG|CZG|DNDT|ADNDT|RDNDT|SAG|DEF)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "aspherical coefficients",
+					"match":"(^|;|\\[\\s*)([a-hA-HkK])(\\s|;|$)",
+					"captures":{
+						"2":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "array",
+					"match": "\\b((?i)ARX|ARY|ARXO|ARYO|AMX|AMY|AADE|ABDE|ACDE)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "grating/hologram",
+					"match": "\\b((?i)GRO|GRX|GRY|HWL)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "material",
+					"match": "\\b((?i)GLA|GL1|GL2|EXC|DNO|DVO|GADE|GBDE|GCDE|GXDE|GYDE)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "aperture",
+					"match": "\\b((?i)CIR|REX|REY|ELX|ELY|ADX|ADY|ARO|SD|WTA)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "environment",
+					"match": "\\b((?i)TEM|PRE)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "ray data",
+					"match": "\\b((?i)AOI|AOR|X|Y|Z|XGR|YGR|CX|CY|CZ|CXG|CYG|CZG|CXN|CYN|CZN)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "tolerance",
+					"match": "\\b((?i)TSF|TSI|TST|TSN|TSV|TSX|TSY|TSZ|TSA|TSB|TSG|TSH)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "geometrical analysis",
+					"match": "\\b((?i)FAN|VIE|SPD|SPX|SPY|SPDPV|SPXPV|SPYPV|LAC|LAX|LAY|SSR|SPA|COMA|ASTI|PETZ|PTZ|DIST|DST|LCA|TCA|AX|DISX|DISY|FDISX|FDISY|VIG|ECG|GMTFT|GMTFS|GMTFA|ASTT|ASTS|ASTD)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "wave optics analysis",
+					"match": "\\b((?i)CEF|CEFDB|STREHL|DMD|MTF|MTFA|MTFS|MTFT|WAV|WAVPV|WAVZ|ECE|EQE)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "gaussian beam",
+					"match": "\\b((?i)WRX|WRY|ZWX|ZWY|RCX|RCY|SRX|SRY|GDX|GDY|RRX|RRY)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "fiber data",
+					"match": "\\b((?i)FSR|FSD|FSA|FSB|FSN1|FSN2|FSCR|FRR|FRD|FRA|FRB|FRX|FRY|FRN1|FRN2|FRCR)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "light source for illumination analysis",
+					"match": "\\b((?i)SUSE|SPWR|SXEX|SYEX|SXDE|SYDE|SZDE|SADE|SBDE|SCDE|SARAY|SPRAY|SGREF|SDIVX|SDIVY|SOFA|SOFB)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "other functions",
+					"match": "\\b((?i)RAIS|RAIT|TIT|COM|DAT|TIM|POX|POY|POZ|WEI|SPG)\\b",
+					"captures": {
+						"0":{
+							"name": "keyword.language.optalix"
+						}
+					}
+				}
+			]
+		},
+		"functions":{
+			"patterns":[
+				{
+					"match": "(^|;|\\(|,|\\s|[\\-\\+\\*\\/\\\\=])((?i)sin|cos|tan|exp|log|log10|logn|sqrt|acos|asin|atan|cosh|sinh|tanh|besj0|besj1|besjn|aint|anint|abs|min|max|sech|csch)\\b",
+					"captures":{
+						"2":{
+							"name": "support.function.language.optalix"
+						}
+					}
+				},
+				{
+					"comment": "user defined function",
+					"match":"(^|;|\\(|,|\\s|[\\-\\+\\*\\/\\\\=])(@)([a-zA-Z][a-zA-Z0-9_]*)\\b",
+					"captures":{
+						"2":{
+							"name": "punctuation.definition.function.other.optalix"
+						}
+					}
+				}
+			]	
+		},
+		"colors":{
+			"patterns":[
+				{
+					"comment": "predefined colors",
+					"match": "\\b((?i)RED|GRE|BLU|MAG|CYA|YEL|BLA|BRO|ORA|GRY|VIO|TUR|SAL)\\b",
+					"captures":{
+						"1":{
+							"name": "constant.colors.optalix"
+						}
+					}
+				}
+			]
+		}
+	}
+}
