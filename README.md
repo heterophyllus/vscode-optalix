@@ -1,4 +1,4 @@
-# OpTaliX Macro language support for Visual Studio Code
+# OpTaliX macro language support for Visual Studio Code
 
 This extension adds syntax highlighting for [OpTaliX](http://www.optenso.com/index.html) macros.
 
