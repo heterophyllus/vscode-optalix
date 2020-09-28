@@ -6,7 +6,7 @@ This extension adds syntax highlighting for [OpTaliX](http://www.optenso.com/ind
 ![syntax](images/syntax.png)
 
 ## Note
-Example macro is introduced [here](http://www.optenso.com/optix/ex_macro.html).
+The example macro is posted [here](http://www.optenso.com/optix/ex_macro.html).
 
 ## Changelog
 Read the [CHANGELOG](CHANGELOG.md) to know what has changed over the last few versions of this extension.
