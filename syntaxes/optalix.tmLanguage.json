@@ -143,11 +143,29 @@
 		"qualifiers":{
       		"patterns":[
 				{
-					"comment": "qualifier with constant number or special character",
-					"match": "\\s(?i:[abefgijlqrstuwz](\\d+|[acilos]))\\b",
+					"comment": "qualifier with constant number",
+					"match": "\\s(?i:[abefgijlqrstuwz](\\d+))\\b",
 					"captures":{
 						"0":{
-							"name": "constant.language.qualifier.optalix"
+							"name": "support.type.qualifier.optalix"
+						}
+					}
+				},
+				{
+					"comment": "qualifier with special constant character (all, current, last)",
+					"match": "\\s(?i:[abefgijlqrstuwz]([acl]))\\b",
+					"captures":{
+						"0":{
+							"name": "support.type.qualifier.optalix"
+						}
+					}
+				},
+				{
+					"comment": "qualifier with special constant character, especially for surface (image, object, stop)",
+					"match": "\\s(?i:[s]([ios]))\\b",
+					"captures":{
+						"0":{
+							"name": "support.type.qualifier.optalix"
 						}
 					}
 				},
@@ -156,7 +174,7 @@
 					"match": "\\s((?i)[abefgijlqrstuwz])((\".*\")|('.*'))",
 					"captures":{
 						"1":{
-							"name": "constant.language.qualifier.optalix"
+							"name": "support.type.qualifier.optalix"
 						},
 						"3":{
 							"name": "string.quoted.double.optalix"
@@ -171,7 +189,7 @@
 					"match": "\\s((?i)[abefgijlqrstuwz])(\\$[a-zA-Z][a-zA-Z0-9_]*)\\b",
 					"captures":{
 						"1":{
-							"name": "constant.language.qualifier.optalix"
+							"name": "support.type.qualifier.optalix"
 						},
 						"2":{
 							"name": "variable.other.optalix"
@@ -183,7 +201,7 @@
 					"match": "\\s((?i)[abefgijlqrstuwz])(\\%\\d+)\\b",
 					"captures":{
 						"1":{
-							"name": "constant.language.qualifier.optalix"
+							"name": "support.type.qualifier.optalix"
 						},
 						"2":{
 							"name": "variable.other.optalix"
@@ -193,13 +211,16 @@
 				},
 				{
 					"comment": "range qualifier",
-					"match": "(\\.{2})(\\d+|(?i)[acilos])\\b",
+					"match": "(\\.{2})((\\d+)|((?i)[acilos]))\\b",
 					"captures":{
 						"1":{
 							"name": "punctuation.definition.range.qualifier.optalix"
 						},
-						"2":{
-							"name": "constant.language.qualifier.optalix"
+						"3":{
+							"name": "constant.numeric.optalix"
+						},
+						"4":{
+							"name": "support.type.qualifier.optalix"
 						}
 					}
 				}
@@ -209,82 +230,82 @@
 			"patterns":[
 				{
 					"comment": "keywords in more than 2 letters (A)",
-					"match": "(^|;|\\(|\\[|\\s|\\.{1})((?i)(AAP|AAS|ABBE|ADE|ADNDT|ADX|ADY|AF|AFO|AFR|AIM|AIR|ALG|AMX|AMY|AOI|AOR|AP|APD|APO2|APO3|AR|ARO|ARR|ARX|ARXO|ARY|ARYO|ASD|ASD2|ASF|ASO|ASP|ASTD|ASTI|ASTS|ASTT|ASTS|ASTT|ATT|ATY|AVG|AXG))\\b",
+					"match": "(^|;|\\(|\\[|\\s)((?i)(AAP|AAS|ABBE|ADE|ADNDT|ADX|ADY|AF|AFO|AFR|AIM|AIR|ALG|AMX|AMY|AOI|AOR|AP|APD|APO2|APO3|AR|ARO|ARR|ARX|ARXO|ARY|ARYO|ASD|ASD2|ASF|ASO|ASP|ASTD|ASTI|ASTS|ASTT|ASTS|ASTT|ATT|ATY|AVG|AXG))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(B)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(BAS|BDE|BEA|BEN|BFL|BLD|BLN|BLT|BMP|BP|BPR|BR))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(BAS|BDE|BEA|BEN|BFL|BLD|BLN|BLT|BMP|BP|BPR|BR))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(C)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(CAM|CDE|CEF|CEFDB|CGM|CIND|CIR|CIY|CLC|CLS|COA|COM|COMA|CON|COP|CP|CPI|CPO|CR|CTV|CUX|CUY|CX|CXG|CXN|CY|CYG|CYL|CYN|CZ|CZG|CZN))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(CAM|CDE|CEF|CEFDB|CGM|CIND|CIR|CIY|CLC|CLS|COA|COM|COMA|CON|COP|CP|CPI|CPO|CR|CTV|CUX|CUY|CX|CXG|CXN|CY|CYG|CYL|CYN|CZ|CZG|CZN))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(D)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(DAR|DAT|DEF|DEFC|DEL|DEZ|DIM|DIST|DISX|DISY|DLA|DLB|DLF|DLG|DLN|DLR|DLT|DLV|DLX|DLY|DLZ|DMD|DNDT|DNO|DO|DP|DPI|DR|DTR|DVO|DXF))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(DAR|DAT|DEF|DEFC|DEL|DEZ|DIM|DIST|DISX|DISY|DLA|DLB|DLF|DLG|DLN|DLR|DLT|DLV|DLX|DLY|DLZ|DMD|DNDT|DNO|DO|DP|DPI|DR|DTR|DVO|DXF))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(E)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(ECE|ECG|ECHO|EDG|EDI|EFL|EIMD|ELE|ELX|ELY|EPD|EPS|EQE|ERRF|ET|EXC|EXI|EXM|EXP|EXR))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(ECE|ECG|ECHO|EDG|EDI|EFL|EIMD|ELE|ELX|ELY|EPD|EPS|EQE|ERRF|ET|EXC|EXI|EXM|EXP|EXR))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(F)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(FACT|FAN|FANL|FCOMP|FDISX|FDISY|FHY|FIE|FIL|FIO|FIR|FLO|FNO|FOO|FOPT|FRA|FRB|FRCR|FRD|FRMM|FRN1|FRN2|FRR|FRX|FRY|FSA|FSB|FSCR|FSD|FSMM|FSN1|FSN2|FSR|FSYM|FTAR|FTYP|FWGT))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(FACT|FAN|FANL|FCOMP|FDISX|FDISY|FHY|FIE|FIL|FIO|FIR|FLO|FNO|FOO|FOPT|FRA|FRB|FRCR|FRD|FRMM|FRN1|FRN2|FRR|FRX|FRY|FSA|FSB|FSCR|FSD|FSMM|FSN1|FSN2|FSR|FSYM|FTAR|FTYP|FWGT))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(G)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(GADE|GBDE|GCAT|GCDE|GDISP|GDX|GDY|GHO|GHP|GHS|GHV|GIC|GIS|GIT|GL1|GL2|GLA|GLB|GLO|GLP|GNRD|GPSF|GRA|GRD|GRO|GRX|GRY|GSC|GSM|GZO))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(GADE|GBDE|GCAT|GCDE|GDISP|GDX|GDY|GHO|GHP|GHS|GHV|GIC|GIS|GIT|GL1|GL2|GLA|GLB|GLO|GLP|GNRD|GPSF|GRA|GRD|GRO|GRX|GRY|GSC|GSM|GZO))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(H)",
-					"match":"(^|;|\\(|\\s|\\.{1})((?i)(HCI|HCO|HCY|HMX|HMY|HOL|HOM|HOR|HOT|HPGL|HWL|HX1|HX2|HY1|HY2|HZ1|HZ2))\\b",
+					"match":"(^|;|\\(|\\s)((?i)(HCI|HCO|HCY|HMX|HMY|HOL|HOM|HOR|HOT|HPGL|HWL|HX1|HX2|HY1|HY2|HZ1|HZ2))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(I)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(IBZ|IC|IFG|IFR|ILL|ILN|IMC|IMD|IMG|IMP|IMPR|IMY|INC|IND|INE|INR|INS|INT|INV|INX|INY|IRR|IRX|IRY|ISF))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(IBZ|IC|IFG|IFR|ILL|ILN|IMC|IMD|IMG|IMP|IMPR|IMY|INC|IND|INE|INR|INS|INT|INV|INX|INY|IRR|IRX|IRY|ISF))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
@@ -294,145 +315,145 @@
 				},
 				{
 					"comment":"(K)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(KX|KY))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(KX|KY))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(L)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(LAC|LCA|LD|LDS|LEN|LFC|LFK|LIM|LIS|LVR))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(LAC|LCA|LD|LDS|LEN|LFC|LFK|LIM|LIS|LVR))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(M)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(M2|MAE|MAG|MAN|MAXFLD|MELT|MFL|MFR|MFRA|MFRF|MHT|MMF|MNA|MNE|MNT|MOD|MOV|MPI|MPR|MRD|MTF|MTF2D|MTFA|MTFS|MTFT|MXA|MXG|MXH|MXT))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(M2|MAE|MAG|MAN|MAXFLD|MELT|MFL|MFR|MFRA|MFRF|MHT|MMF|MNA|MNE|MNT|MOD|MOV|MPI|MPR|MRD|MTF|MTF2D|MTFA|MTFS|MTFT|MXA|MXG|MXH|MXT))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(N)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(NA|NAO|NAX|NFLD|NFNC|NNU|NOR|NRD|NSS|NWL))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(NA|NAO|NAX|NFLD|NFNC|NNU|NOR|NRD|NSS|NWL))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(O)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(OAL|OBS|OERR|OID|OMN|OOS|OPD|OPDFAN|OPDW|OPL|OPT|ORB|ORGR|OSP|OTH|OUT))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(OAL|OBS|OERR|OID|OMN|OOS|OPD|OPDFAN|OPDW|OPL|OPT|ORB|ORGR|OSP|OTH|OUT))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(P)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(PA1|PA2|PATH|PCO|PCX|PETZ|PGO|PIM|PKL|PLO|PLT|PMA|PMI|PNG|POL|POLSTATE|POR|POS|POX|POY|POZ|PPOS|PRD|PRDI|PRE|PRN|PRV|PSF|PTH|PUI|PUX|PUY|PWL))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(PA1|PA2|PATH|PCO|PCX|PETZ|PGO|PIM|PKL|PLO|PLT|PMA|PMI|PNG|POL|POLSTATE|POR|POS|POX|POY|POZ|PPOS|PRD|PRDI|PRE|PRN|PRV|PSF|PTH|PUI|PUX|PUY|PWL))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(Q)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(QSM|QST|QUA))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(QSM|QST|QUA))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(R)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(RAD|RAG|RAIM|RAIO|RAIS|RAIT|RAW2INT|RAYCX|RAYCY|RAYLOG|RAYX|RAYY|RCX|RCY|RDM|RDNDT|RDX|RDY|REC|RED|REF|REFL|REFR|REG|REM|REN|RES|REX|REY|RIM|RIRR|RMD|RSI|RSP))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(RAD|RAG|RAIM|RAIO|RAIS|RAIT|RAW2INT|RAYCX|RAYCY|RAYLOG|RAYX|RAYY|RCX|RCY|RDM|RDNDT|RDX|RDY|REC|RED|REF|REFL|REFR|REG|REM|REN|RES|REX|REY|RIM|RIRR|RMD|RSI|RSP))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(S)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(SADE|SAG|SAP|SAPI|SARAY|SAV|SBDE|SCA|SCDE|SCO|SDIVX|SDIVY|SEP|SET|SGREF|SH1|SH2|SIN|SLB|SLID|SOL|SPA|SPD|SPG|SPH|SPL|SPLN|SPLR|SPLZ|SPMS|SPO|SPR|SPRAY|SPS|SPWR|SPX|SPY|SRC|SRX|SRY|SSP|SSR|SSZ|STE|STO|STREHL|SUR|SUSE|SUT|SVG|SXDE|SXEX|SYEX|SYDE|SYL|SYS|SZDE))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(SADE|SAG|SAP|SAPI|SARAY|SAV|SBDE|SCA|SCDE|SCO|SDIVX|SDIVY|SEP|SET|SGREF|SH1|SH2|SIN|SLB|SLID|SOL|SPA|SPD|SPG|SPH|SPL|SPLN|SPLR|SPLZ|SPMS|SPO|SPR|SPRAY|SPS|SPWR|SPX|SPY|SRC|SRX|SRY|SSP|SSR|SSZ|STE|STO|STREHL|SUR|SUSE|SUT|SVG|SXDE|SXEX|SYEX|SYDE|SYL|SYS|SZDE))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(T)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(TAR|TCA|TEM|TGR|THI|THM|THO|THR|TIM|TIN|TIR|TIT|TLM|TLT|TOL|TOLC|TOR|TPF|TPI|TPL|TRA|TRR|TSA|TSB|TSEQ|TSF|TSG|TSH|TSI|TSN|TSR|TST|TSV|TSX|TSY|TSZ))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(TAR|TCA|TEM|TGR|THI|THM|THO|THR|TIM|TIN|TIR|TIT|TLM|TLT|TOL|TOLC|TOR|TPF|TPI|TPL|TRA|TRR|TSA|TSB|TSEQ|TSF|TSG|TSH|TSI|TSN|TSR|TST|TSV|TSX|TSY|TSZ))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(U)",
-					"match":"(^|;|\\(|\\s|\\.{1})((?i)(UCO|UCY|UDG|UDS|UGR|UMX|UMY))\\b",
+					"match":"(^|;|\\(|\\s)((?i)(UCO|UCY|UDG|UDS|UGR|UMX|UMY))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(V)",
-					"match":"(^|;|\\(|\\s|\\.{1})((?i)(VAR|VARZ|VIE|VIGP|VLS|VLX|VLY|VPT|VUX|VUY))\\b",
+					"match":"(^|;|\\(|\\s)((?i)(VAR|VARZ|VIE|VIGP|VLS|VLX|VLY|VPT|VUX|VUY))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(W)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(WAV|WAVPV|WAVZ|WDX|WDY|WEI|WFR|WL|WMF|WRX|WRY|WT|WTC|WTW|WZRN))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(WAV|WAVPV|WAVZ|WDX|WDY|WEI|WFR|WL|WMF|WRX|WRY|WT|WTC|WTW|WZRN))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(X)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(XAN|XDE|XGR|XIM|XOB|XRI|XSC|XSG))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(XAN|XDE|XGR|XIM|XOB|XRI|XSC|XSG))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(Y)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(YAN|YDE|YGR|YIM|YOB|YRI|YSC|YSG|YTO))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(YAN|YDE|YGR|YIM|YOB|YRI|YSC|YSG|YTO))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
 				{
 					"comment":"(Z)",
-					"match":"(^|;|\\(|\\[|\\s|\\.{1})((?i)(ZACT|ZDE|ZED|ZOO|ZRN|ZSC|ZSG|ZWACT|ZWX|ZWY))\\b",
+					"match":"(^|;|\\(|\\[|\\s)((?i)(ZACT|ZDE|ZED|ZOO|ZRN|ZSC|ZSG|ZWACT|ZWX|ZWY))\\b",
 					"captures":{
 						"2":{
-							"name": "keyword.language.other.codev"
+							"name": "keyword.other.codev"
 						}
 					}
 				},
@@ -444,7 +465,7 @@
 							"match":"(^|;|\\(\\s*)([aAbBcCdD])(\\s|;|$)",
 							"captures":{
 								"2":{
-									"name": "keyword.language.other.codev"
+									"name": "keyword.other.codev"
 								}
 							}
 						},
@@ -453,7 +474,7 @@
 							"match": "\\s([fF])(\\s*\\)|;|$)",
 							"captures":{
 								"1":{
-									"name": "constant.language.other.codev"
+									"name": "constant.other.codev"
 								}
 							}
 						},
@@ -462,7 +483,7 @@
 							"match":"(^|;|\\(\\s*)([lLmMnN])\\b",
 							"captures":{
 								"2":{
-									"name": "keyword.language.other.codev"
+									"name": "keyword.other.codev"
 								}
 							}
 						},
@@ -471,7 +492,7 @@
 							"match": "\\s([nN])\\s*(;|$)",
 							"captures":{
 								"1":{
-									"name": "constant.language.other.codev"
+									"name": "constant.other.codev"
 								}
 							}
 						},
@@ -480,7 +501,7 @@
 							"match": "\\s([sS])(\\s*\\)|;|$)",
 							"captures":{
 								"1":{
-									"name": "constant.language.other.codev"
+									"name": "constant.other.codev"
 								}
 							}
 						},
@@ -489,7 +510,7 @@
 							"match": "\\s([tT])\\s*(;|$)",
 							"captures":{
 								"1":{
-									"name": "constant.language.other.codev"
+									"name": "constant.other.codev"
 								}
 							}
 						},
@@ -498,7 +519,7 @@
 							"match": "\\s([wW])(\\s*\\)|;|$)",
 							"captures":{
 								"1":{
-									"name": "constant.language.other.codev"
+									"name": "constant.other.codev"
 								}
 							}
 						},
@@ -507,7 +528,7 @@
 							"match":"(^|;|\\(\\s*)([xX])\\b",
 							"captures":{
 								"2":{
-									"name": "keyword.language.other.codev"
+									"name": "keyword.other.codev"
 								}
 							}
 						},
@@ -516,7 +537,7 @@
 							"match":"(^|;|\\(\\s*)([yY])\\b",
 							"captures":{
 								"2":{
-									"name": "keyword.language.other.codev"
+									"name": "keyword.other.codev"
 								}
 							}
 						},
@@ -525,7 +546,7 @@
 							"match": "\\s([yY])\\s*(;|$)",
 							"captures":{
 								"1":{
-									"name": "constant.language.other.codev"
+									"name": "constant.other.codev"
 								}
 							}
 						},
@@ -534,7 +555,7 @@
 							"match":"(^|;|\\(\\s*)([zZ])\\b",
 							"captures":{
 								"2":{
-									"name": "keyword.language.other.codev"
+									"name": "keyword.other.codev"
 								}
 							}
 						},
@@ -543,7 +564,7 @@
 							"match": "\\s([zZ])(\\s*\\)|;|$)",
 							"captures":{
 								"1":{
-									"name": "constant.language.other.codev"
+									"name": "constant.other.codev"
 								}
 							}
 						}
@@ -565,10 +586,10 @@
 				},
 				{
 					"comment": "user defined function",
-					"match":"\\b(@[a-zA-Z][a-zA-Z0-9_]*)\\b",
+					"match":"(^|;|\\(|,|\\s|[\\-\\+\\*\\/\\\\=])(@[a-zA-Z][a-zA-Z0-9_]*)\\b",
 					"captures":{
-						"0":{
-							"name": "support.function.other.optalix"
+						"2":{
+							"name": "support.function.user-defined.optalix"
 						}
 					}
 				}

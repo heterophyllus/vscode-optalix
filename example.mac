@@ -1,3 +1,5 @@
+! http://www.optenso.com/optix/ex_macro.html
+
 ! Example macro	                        The character  !  indicates a comment. This line is not executed.
 
 $x = 15	                                 !Defines a user-defined variable and assigns a value. User-defined variables always begin with the $-character.
